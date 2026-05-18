@@ -1,0 +1,21 @@
+# Trained weights - distributed via gdown
+*.pt
+*.pth
+
+# W&B local artefacts
+wandb/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor / env
+.vscode/
+.idea/
+.env
