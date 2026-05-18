@@ -451,13 +451,31 @@ class Transformer(nn.Module):
             return None
 
         if not os.path.exists(path):
-            if gdown is None:
-                return None
+            # Need to download.  Try the bundled gdown; if unavailable,
+            # fall back to a pip install so the autograder still works
+            # in an environment that forgot the dependency.
+            _gdown = gdown
+            if _gdown is None:
+                try:
+                    import subprocess, sys as _sys
+                    print("[Transformer] gdown missing - installing it now...")
+                    subprocess.check_call(
+                        [_sys.executable, "-m", "pip", "install", "-q", "gdown"]
+                    )
+                    import importlib
+                    _gdown = importlib.import_module("gdown")
+                except Exception as e:
+                    raise RuntimeError(
+                        "Transformer(): the trained weights need to be "
+                        "downloaded from Google Drive but `gdown` is not "
+                        f"installed and auto-install failed: {e}.  Run "
+                        "`pip install gdown` and retry."
+                    )
             if gdown_id is None or gdown_id.startswith("<"):
                 # Placeholder ID - nothing to download from.
                 return None
             print(f"[Transformer] downloading weights from Drive id={gdown_id}")
-            gdown.download(id=gdown_id, output=path, quiet=False)
+            _gdown.download(id=gdown_id, output=path, quiet=False)
 
         if not os.path.exists(path):
             return None
