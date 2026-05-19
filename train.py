@@ -1,12 +1,6 @@
 """
 train.py - Training pipeline, inference and evaluation
 DA6401 Assignment 3: "Attention Is All You Need"
-
-AUTOGRADER CONTRACT (signatures preserved):
-  greedy_decode(model, src, src_mask, max_len, start_symbol, end_symbol) -> [1, out_len]
-  evaluate_bleu(model, test_dataloader, tgt_vocab, device) -> float
-  save_checkpoint(model, optimizer, scheduler, epoch, path) -> None
-  load_checkpoint(path, model, optimizer, scheduler)        -> int
 """
 
 import argparse
