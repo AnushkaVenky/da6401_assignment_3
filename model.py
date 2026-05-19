@@ -101,8 +101,6 @@ def make_tgt_mask(tgt: torch.Tensor, pad_idx: int = 1) -> torch.Tensor:
 
 class MultiHeadAttention(nn.Module):
     """
-    Multi-Head Attention (Vaswani et al. 2017, sec. 3.2.2).
-
     Args:
         d_model:   total model dimensionality (must be divisible by num_heads)
         num_heads: number of attention heads h
@@ -335,14 +333,7 @@ class Decoder(nn.Module):
 
 class Transformer(nn.Module):
     """
-    Full encoder-decoder Transformer.
-
-    AUTOGRADER USAGE:
-        model = Transformer().to(device)
-        model.eval()
-        english = model.infer(german_sentence)
-
-    With no arguments the constructor:
+    Full encoder-decoder Transformer with no arguments the constructor:
       1. builds the canonical architecture (DEFAULT_* constants),
       2. downloads the trained weights + vocabs from Google Drive
          (SUBMISSION_GDOWN_ID) into DEFAULT_CKPT_PATH,
